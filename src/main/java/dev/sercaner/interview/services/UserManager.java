@@ -1,4 +1,5 @@
 package dev.sercaner.interview.services;
+
 import dev.sercaner.interview.dataAccess.UserRepository;
 import dev.sercaner.interview.entities.User;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UserManager implements UserService{
+public class UserManager implements UserService {
     private UserRepository userRepository;
 
     @Override
@@ -25,7 +26,7 @@ public class UserManager implements UserService{
     @Override
     public User getUser(Long id) {
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()){
+        if (user.isPresent()) {
             return user.get();
         }
         return null;
@@ -34,7 +35,7 @@ public class UserManager implements UserService{
     @Override
     public User update(Long id, User user) {
         Optional<User> resultUser = userRepository.findById(id);
-        if (resultUser.isPresent()){
+        if (resultUser.isPresent()) {
             resultUser.get().setFirstName(user.getFirstName());
             resultUser.get().setLastName(user.getLastName());
             return userRepository.save(resultUser.get());
