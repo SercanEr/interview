@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class UserManager implements UserService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public User createUser(User user) {
@@ -41,5 +41,15 @@ public class UserManager implements UserService {
             return userRepository.save(resultUser.get());
         }
         return null;
+    }
+
+    @Override
+    public Boolean deleteUser(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

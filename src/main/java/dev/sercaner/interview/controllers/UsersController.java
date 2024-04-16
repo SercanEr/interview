@@ -3,7 +3,6 @@ package dev.sercaner.interview.controllers;
 import dev.sercaner.interview.entities.User;
 import dev.sercaner.interview.services.UserService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +39,12 @@ public class UsersController {
     @PutMapping("/{id}")
     public User update(@PathVariable() Long id, @RequestBody User user) {
         return this.userService.update(id, user);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteUser(@PathVariable("id") Long id) {
+        Boolean status = userService.deleteUser(id);
+        return ResponseEntity.ok(status);
     }
 
 }
